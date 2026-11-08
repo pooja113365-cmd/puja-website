@@ -84,7 +84,6 @@ export default function Navbar() {
           <div>
             <div className="font-serif text-2xl font-bold tracking-tight text-white">
               Get<span className="text-gold-400">Puja</span>
-              <span className="text-lg font-sans font-semibold text-cream-200">.com</span>
             </div>
             <span className="block text-[10px] font-semibold tracking-wider text-gold-300">
               Book • Shop • Perform • Receive

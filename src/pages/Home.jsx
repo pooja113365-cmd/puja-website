@@ -10,7 +10,6 @@ import {
   ShoppingCart,
   Search,
   ArrowRight,
-  Sparkles,
 } from 'lucide-react';
 import useFetch from '../hooks/useFetch';
 import PujaCard from '../components/PujaCard';
@@ -100,12 +99,7 @@ export default function Home() {
             transition={{ duration: 0.35 }}
             className="lg:col-span-7"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-gold-400/60 bg-white/10 px-4 py-1 text-xs font-bold text-gold-300 backdrop-blur-sm">
-              <Sparkles className="h-3.5 w-3.5 text-gold-400" />
-              <span>Book • Shop • Perform • Receive Your Pujas Online</span>
-            </div>
-
-            <h1 className="mt-4 font-serif text-4xl font-bold leading-tight text-white sm:text-5xl">
+            <h1 className="font-serif text-4xl font-bold leading-tight text-white sm:text-5xl">
               Book Pujas, Buy <span className="text-gold-400">Puja Items</span> &amp; Spiritual Essentials
             </h1>
             <p className="mt-3 max-w-xl text-base text-cream-200/90">
