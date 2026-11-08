@@ -599,33 +599,10 @@ export default function Home() {
               className="pointer-events-none absolute -inset-4 rounded-full bg-gradient-to-tr from-[#F58216]/35 via-[#F7B928]/25 to-transparent blur-2xl"
             />
 
-            {/* Counter-Rotating Sacred Geometric Halo Ring Behind Arch */}
-            <motion.svg
-              viewBox="0 0 500 500"
-              className="pointer-events-none absolute -inset-6 m-auto h-[105%] w-[105%] opacity-30"
-              fill="none"
-              aria-hidden="true"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 48, repeat: Infinity, ease: 'linear' }}
-            >
-              <circle cx="250" cy="250" r="236" stroke="#F7B928" strokeWidth="1.5" strokeDasharray="8 6" />
-              <circle cx="250" cy="250" r="222" stroke="#F58216" strokeWidth="1" strokeDasharray="3 6" />
-              {Array.from({ length: 16 }).map((_, i) => (
-                <circle
-                  key={i}
-                  cx="250"
-                  cy="14"
-                  r="3.5"
-                  fill="#F7B928"
-                  transform={`rotate(${i * 22.5} 250 250)`}
-                />
-              ))}
-            </motion.svg>
-
             <motion.div
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-              className="relative mx-auto max-w-[435px] pb-3"
+              className="relative mx-auto max-w-[445px]"
             >
               {/* SVG Temple Cusped Arch Frame */}
               <svg
@@ -675,9 +652,6 @@ export default function Home() {
                   strokeWidth="1.2"
                 />
               </svg>
-
-              {/* Transparent Decorative Kalash, Marigolds, Thali & Standing Brass Deepam at Base of Arch */}
-              <SacredKalashAndDeepamDecor />
             </motion.div>
           </motion.div>
         </div>
