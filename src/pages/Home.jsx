@@ -443,7 +443,7 @@ function FeatureCardsGrid({ className = '' }) {
         <Link
           key={line1 + line2}
           to={to}
-          className="group flex flex-col items-center justify-center gap-1.5 rounded-xl border border-[#F7B928]/55 bg-[#300B32]/85 px-2 py-2.5 text-center shadow-sm backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-[#F7B928] hover:bg-[#3E1041]/90 lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:py-2 lg:text-left"
+          className="group flex flex-col items-center justify-center gap-1.5 rounded-xl border border-[#F7B928]/45 bg-[#300B32]/85 px-2 py-2.5 text-center shadow-sm backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-[#F7B928] hover:bg-[#3E1041]/90 lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:py-2 lg:text-left"
         >
           <Icon />
           <span className="text-[11px] font-medium leading-tight text-white sm:text-xs">
@@ -500,12 +500,12 @@ export default function Home() {
     <>
       {/* Hero Section — Deep Purple #300B32, Primary Gold #F7B928, Secondary Orange #F58216 */}
       <section className="relative flex flex-col justify-between overflow-hidden bg-[#300B32] text-white lg:min-h-[calc(100vh-4rem)] lg:w-full lg:flex-row lg:items-center">
-        {/* Warm Ambient Gradient Overlay */}
+        {/* Warm Ambient Gradient Overlay (Identical rich warm amber-purple glow on Mobile & Desktop) */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              'radial-gradient(circle at 72% 48%, rgba(245, 130, 22, 0.3) 0%, rgba(247, 185, 40, 0.14) 34%, rgba(48, 11, 50, 0.96) 72%)',
+              'radial-gradient(circle at 60% 45%, rgba(245, 130, 22, 0.34) 0%, rgba(247, 185, 40, 0.16) 38%, rgba(48, 11, 50, 0.95) 76%)',
           }}
         />
 
@@ -704,7 +704,7 @@ export default function Home() {
                   strokeLinejoin="round"
                 />
 
-                {/* Centered Bottom Kalash, Mango Leaves, Yellow & Red Flowers */}
+                {/* Centered Bottom Kalash, Mango Leaves, Yellow & Red Flowers (Exact match with desktop view) */}
                 <g transform="translate(320, 428)">
                   {/* Left & Right Green Mango Leaves at Base */}
                   <path d="M -52 12 C -85 -4, -120 8, -138 26 C -106 32, -74 26, -52 12 Z" fill="#16A34A" />
@@ -712,29 +712,23 @@ export default function Home() {
                   <path d="M 52 12 C 85 -4, 120 8, 138 26 C 106 32, 74 26, 52 12 Z" fill="#16A34A" />
                   <path d="M 46 22 C 76 16, 104 28, 118 42 C 88 42, 64 34, 46 22 Z" fill="#15803D" />
 
-                  {/* Outer Yellow Flowers */}
+                  {/* Outer Yellow/Orange Marigold Flowers */}
                   <g transform="translate(-76, 18)">
-                    <circle cx="0" cy="0" r="18" fill="#FACC15" stroke="#CA8A04" strokeWidth="1" />
-                    <circle cx="0" cy="0" r="11" fill="#F7B928" />
-                    <circle cx="0" cy="0" r="5" fill="#B45309" />
+                    <circle cx="0" cy="0" r="18" fill="#F7B928" />
+                    <circle cx="0" cy="0" r="11" fill="#F58216" />
+                    <circle cx="0" cy="0" r="5" fill="#FACC15" />
                   </g>
                   <g transform="translate(76, 18)">
-                    <circle cx="0" cy="0" r="18" fill="#FACC15" stroke="#CA8A04" strokeWidth="1" />
-                    <circle cx="0" cy="0" r="11" fill="#F7B928" />
-                    <circle cx="0" cy="0" r="5" fill="#B45309" />
+                    <circle cx="0" cy="0" r="18" fill="#F7B928" />
+                    <circle cx="0" cy="0" r="11" fill="#F58216" />
+                    <circle cx="0" cy="0" r="5" fill="#FACC15" />
                   </g>
 
                   {/* Inner Red Flowers */}
-                  <g transform="translate(-48, 28)">
-                    <circle cx="0" cy="0" r="14" fill="#DC2626" stroke="#991B1B" strokeWidth="1" />
-                    <circle cx="0" cy="0" r="8" fill="#EF4444" />
-                    <circle cx="0" cy="0" r="3.5" fill="#FACC15" />
-                  </g>
-                  <g transform="translate(48, 28)">
-                    <circle cx="0" cy="0" r="14" fill="#DC2626" stroke="#991B1B" strokeWidth="1" />
-                    <circle cx="0" cy="0" r="8" fill="#EF4444" />
-                    <circle cx="0" cy="0" r="3.5" fill="#FACC15" />
-                  </g>
+                  <circle cx="-48" cy="24" r="11" fill="#DC2626" />
+                  <circle cx="-48" cy="24" r="5" fill="#F7B928" />
+                  <circle cx="48" cy="24" r="11" fill="#DC2626" />
+                  <circle cx="48" cy="24" r="5" fill="#F7B928" />
 
                   {/* Top Mango Leaves & Coconut on Kalash */}
                   <path d="M -12 -32 C -32 -48, -46 -38, -48 -20 C -32 -20, -20 -26, -12 -32 Z" fill="#16A34A" />
