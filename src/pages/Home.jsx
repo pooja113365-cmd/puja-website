@@ -320,7 +320,10 @@ function OmOrnamentDivider() {
  */
 function SacredKalashAndDeepamDecor() {
   return (
-    <svg
+    <motion.svg
+      initial={{ opacity: 0, y: 70 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.85, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
       viewBox="0 0 380 185"
       className="pointer-events-none absolute -bottom-5 left-2 z-20 w-[82%] max-w-[330px] drop-shadow-[0_12px_20px_rgba(0,0,0,0.65)] select-none"
       fill="none"
@@ -421,7 +424,7 @@ function SacredKalashAndDeepamDecor() {
           fill="url(#deepamFlame)"
         />
       ))}
-    </svg>
+    </motion.svg>
   );
 }
 
@@ -524,14 +527,8 @@ export default function Home() {
             transition={{ duration: 0.35 }}
             className="lg:col-span-7"
           >
-            {/* Top Lotus Pill Badge */}
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-[#F7B928]/55 bg-[#300B32]/85 px-4 py-1 text-xs font-medium text-white shadow-sm">
-              <LotusBadgeIcon />
-              <span>Online Puja &amp; Spiritual Services</span>
-            </div>
-
             {/* 3-Line Serif Heading */}
-            <h1 className="mt-2.5 font-serif text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
+            <h1 className="font-serif text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
               Book Pujas, Buy
               <br />
               Puja Items &amp;
@@ -588,11 +585,11 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Right Column — Scalloped Sacred Temple Arch Frame with Rotating Chakra Halo & Floating Motion */}
+          {/* Right Column — Scalloped Sacred Temple Arch Frame Rising From Bottom on Load */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.08 }}
+            initial={{ opacity: 0, y: 120, scale: 0.94 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
             className="relative lg:col-span-5"
           >
             {/* Pulsing Golden-Orange Aura Behind Arch */}
@@ -648,15 +645,18 @@ export default function Home() {
                   </linearGradient>
                 </defs>
 
-                {/* Clipped Hero Puja Image */}
+                {/* Clipped Hero Puja Image Rising From Bottom */}
                 <g clipPath="url(#templeArchClip)">
-                  <image
+                  <motion.image
                     href="/images/hero-puja.jpg"
                     x="0"
                     y="10"
                     width="460"
                     height="425"
                     preserveAspectRatio="xMidYMid slice"
+                    initial={{ y: 110, opacity: 0, scale: 1.06 }}
+                    animate={{ y: 10, opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.95, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                   />
                 </g>
 
