@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ShoppingCart, Search, ArrowRight } from 'lucide-react';
@@ -6,6 +6,14 @@ import useFetch from '../hooks/useFetch';
 import PujaCard from '../components/PujaCard';
 import { PujaGridSkeleton } from '../components/PujaCardSkeleton';
 import { ErrorState } from '../components/States';
+
+const SEARCH_PHRASES = [
+  'Search for Satyanarayan Vrat & Katha...',
+  'Search for Griha Pravesh Puja...',
+  'Search for Navagraha Shanti Havan...',
+  'Search for Puja Samagri & Kalash Kits...',
+  'Search for Verified Priests in Hyderabad...',
+];
 
 const QUICK_CATEGORIES = [
   { title: 'Pujas', subtitle: 'Home & Office', img: '/images/hero-puja.jpg', to: '/pujas' },
@@ -431,7 +439,32 @@ function SacredKalashAndDeepamDecor() {
 export default function Home() {
   const { data, loading, error, reload } = useFetch('/pujas', { featured: 'true', limit: 6 });
   const [searchText, setSearchText] = useState('');
+  const [phraseIdx, setPhraseIdx] = useState(0);
+  const [typedPlaceholder, setTypedPlaceholder] = useState('');
+  const [isDeletingPlaceholder, setIsDeletingPlaceholder] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const currentPhrase = SEARCH_PHRASES[phraseIdx];
+    let timer;
+    if (!isDeletingPlaceholder && typedPlaceholder.length < currentPhrase.length) {
+      timer = setTimeout(() => {
+        setTypedPlaceholder(currentPhrase.slice(0, typedPlaceholder.length + 1));
+      }, 55);
+    } else if (!isDeletingPlaceholder && typedPlaceholder.length === currentPhrase.length) {
+      timer = setTimeout(() => {
+        setIsDeletingPlaceholder(true);
+      }, 1800);
+    } else if (isDeletingPlaceholder && typedPlaceholder.length > 0) {
+      timer = setTimeout(() => {
+        setTypedPlaceholder(currentPhrase.slice(0, typedPlaceholder.length - 1));
+      }, 28);
+    } else if (isDeletingPlaceholder && typedPlaceholder.length === 0) {
+      setIsDeletingPlaceholder(false);
+      setPhraseIdx((prev) => (prev + 1) % SEARCH_PHRASES.length);
+    }
+    return () => clearTimeout(timer);
+  }, [typedPlaceholder, isDeletingPlaceholder, phraseIdx]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -525,7 +558,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
-            className="lg:col-span-7"
+            className="lg:col-span-6"
           >
             {/* 3-Line Serif Heading */}
             <h1 className="font-serif text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
@@ -555,8 +588,8 @@ export default function Home() {
                 type="text"
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
-                placeholder="Search for Pujas, Homams, Items, Temples..."
-                className="w-full bg-transparent px-2 py-1 text-sm text-[#300B32] outline-none placeholder:text-[#300B32]/55"
+                placeholder={typedPlaceholder || 'Search for Pujas, Homams, Items, Temples...'}
+                className="w-full bg-transparent px-2 py-1 text-sm text-[#300B32] outline-none placeholder:text-[#300B32]/65"
               />
               <button
                 type="submit"
@@ -585,36 +618,116 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Right Column — Wide Golden Frame Showing Full Family & Priest Havan Image Rising From Bottom */}
+          {/* Right Column — Large Wide Cusped Sacred Temple Arch Shape Showing Full Family & Priest Havan */}
           <motion.div
             initial={{ opacity: 0, y: 120, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-            className="relative lg:col-span-5"
+            className="relative lg:col-span-6"
           >
-            {/* Pulsing Golden-Orange Aura Behind Image */}
+            {/* Pulsing Golden-Orange Aura Behind Arch */}
             <motion.div
               animate={{ scale: [0.96, 1.05, 0.96], opacity: [0.5, 0.85, 0.5] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="pointer-events-none absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#F58216]/35 via-[#F7B928]/25 to-transparent blur-2xl"
+              className="pointer-events-none absolute -inset-6 rounded-3xl bg-gradient-to-tr from-[#F58216]/35 via-[#F7B928]/25 to-transparent blur-2xl"
             />
 
             <motion.div
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-              className="relative mx-auto overflow-hidden rounded-3xl border-[3px] border-[#F7B928] bg-[#300B32] p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.65)] ring-1 ring-[#F7B928]/40"
+              className="relative mx-auto w-full max-w-[680px] lg:scale-[1.04]"
             >
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
-                <motion.img
-                  src="/images/hero-puja.jpg"
-                  alt="Family & Vedic Priest Performing Puja & Havan"
-                  className="h-full w-full object-cover"
-                  initial={{ y: 80, scale: 1.08, opacity: 0 }}
-                  animate={{ y: 0, scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              <svg
+                viewBox="0 0 640 480"
+                className="w-full drop-shadow-[0_22px_48px_rgba(0,0,0,0.75)]"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  {/* Extra-Wide & Tall Cusped Temple Arch Clip Path */}
+                  <clipPath id="wideTempleArchClip">
+                    <path d="M 320 8 C 358 46, 422 52, 466 76 C 562 76, 632 138, 632 226 L 632 352 C 632 404, 590 434, 536 434 L 104 434 C 50 434, 8 404, 8 352 L 8 226 C 8 138, 78 76, 174 76 C 218 52, 282 46, 320 8 Z" />
+                  </clipPath>
+                  <linearGradient id="wideArchGold" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#FFFBEB" />
+                    <stop offset="28%" stopColor="#F7B928" />
+                    <stop offset="65%" stopColor="#F58216" />
+                    <stop offset="100%" stopColor="#F7B928" />
+                  </linearGradient>
+                  <radialGradient id="kalashBrass" cx="0.38" cy="0.35" r="0.65">
+                    <stop offset="0%" stopColor="#FFFBEB" />
+                    <stop offset="32%" stopColor="#F7B928" />
+                    <stop offset="72%" stopColor="#D97706" />
+                    <stop offset="100%" stopColor="#78350F" />
+                  </radialGradient>
+                </defs>
+
+                {/* Full Landscape Family & Priest Havan Image Rising From Bottom Inside Wide Arch */}
+                <g clipPath="url(#wideTempleArchClip)">
+                  <motion.image
+                    href="/images/hero-puja.jpg"
+                    x="6"
+                    y="6"
+                    width="628"
+                    height="432"
+                    preserveAspectRatio="none"
+                    initial={{ y: 110, opacity: 0, scale: 1.05 }}
+                    animate={{ y: 6, opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.95, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </g>
+
+                {/* Outer Glowing Golden Arch Border */}
+                <path
+                  d="M 320 8 C 358 46, 422 52, 466 76 C 562 76, 632 138, 632 226 L 632 352 C 632 404, 590 434, 536 434 L 104 434 C 50 434, 8 404, 8 352 L 8 226 C 8 138, 78 76, 174 76 C 218 52, 282 46, 320 8 Z"
+                  fill="none"
+                  stroke="url(#wideArchGold)"
+                  strokeWidth="7.5"
+                  strokeLinejoin="round"
                 />
-                <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-[#F7B928]/45" />
-              </div>
+                {/* Inner Fine Gold Trim */}
+                <path
+                  d="M 320 17 C 356 52, 418 58, 461 82 C 554 82, 622 142, 622 226 L 622 350 C 622 398, 584 426, 532 426 L 108 426 C 56 426, 18 398, 18 350 L 18 226 C 18 142, 86 82, 179 82 C 222 58, 284 52, 320 17 Z"
+                  fill="none"
+                  stroke="#FFFBEB"
+                  strokeOpacity="0.55"
+                  strokeWidth="1.5"
+                  strokeLinejoin="round"
+                />
+
+                {/* Centered Bottom Kalash, Mango Leaves & Marigold Flowers */}
+                <g transform="translate(320, 428)">
+                  {/* Left & Right Green Mango Leaves at Base */}
+                  <path d="M -52 12 C -85 -4, -120 8, -138 26 C -106 32, -74 26, -52 12 Z" fill="#16A34A" />
+                  <path d="M -46 22 C -76 16, -104 28, -118 42 C -88 42, -64 34, -46 22 Z" fill="#15803D" />
+                  <path d="M 52 12 C 85 -4, 120 8, 138 26 C 106 32, 74 26, 52 12 Z" fill="#16A34A" />
+                  <path d="M 46 22 C 76 16, 104 28, 118 42 C 88 42, 64 34, 46 22 Z" fill="#15803D" />
+
+                  {/* Left & Right Golden Marigold Flowers */}
+                  <g transform="translate(-62, 22)">
+                    <circle cx="0" cy="0" r="19" fill="#F58216" stroke="#B45309" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="13" fill="#F7B928" />
+                    <circle cx="0" cy="0" r="6" fill="#D97706" />
+                  </g>
+                  <g transform="translate(62, 22)">
+                    <circle cx="0" cy="0" r="19" fill="#F58216" stroke="#B45309" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="13" fill="#F7B928" />
+                    <circle cx="0" cy="0" r="6" fill="#D97706" />
+                  </g>
+
+                  {/* Top Mango Leaves & Coconut on Kalash */}
+                  <path d="M -12 -32 C -32 -48, -46 -38, -48 -20 C -32 -20, -20 -26, -12 -32 Z" fill="#16A34A" />
+                  <path d="M 12 -32 C 32 -48, 46 -38, 48 -20 C 32 -20, 20 -26, 12 -32 Z" fill="#16A34A" />
+                  <path d="M 0 -52 C -14 -40, -18 -24, 0 -18 C 18 -24, 14 -40, 0 -52 Z" fill="#15803D" />
+
+                  {/* Brass Kalash Rim & Body */}
+                  <ellipse cx="0" cy="-22" rx="24" ry="5.5" fill="url(#kalashBrass)" stroke="#F7B928" strokeWidth="1" />
+                  <path d="M -20 -22 H 20 L 16 -12 H -16 Z" fill="url(#kalashBrass)" />
+                  <ellipse cx="0" cy="14" rx="40" ry="31" fill="url(#kalashBrass)" stroke="#F7B928" strokeWidth="1.5" />
+                  <text x="0" y="23" textAnchor="middle" fill="#B91C1C" fontSize="22" fontWeight="bold" fontFamily="serif">
+                    ॐ
+                  </text>
+                </g>
+              </svg>
             </motion.div>
           </motion.div>
         </div>
