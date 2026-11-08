@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { Menu, X, LogOut, User, MapPin } from 'lucide-react';
+import { Menu, X, LogOut, User, MapPin, ChevronDown } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const links = [
@@ -77,25 +77,32 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-gold-500/35 bg-gradient-to-r from-[#2E0938] via-maroon-900 to-[#2E0938] shadow-lg backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-[#F7B928]/35 bg-[#300B32] shadow-lg backdrop-blur">
       <div className="container-x flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2.5 group">
-          <GetPujaLotusLogo />
-          <div>
-            <div className="font-serif text-2xl font-bold tracking-tight text-white">
-              Get<span className="text-gold-400">Puja</span>
+        <div className="flex items-center gap-6">
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <GetPujaLotusLogo />
+            <div>
+              <div className="font-serif text-2xl font-bold tracking-tight text-white">
+                Get<span className="text-[#F7B928]">Puja</span>
+              </div>
+              <span className="block text-[10px] font-medium tracking-wider text-white/90">
+                Book • Shop • Perform • Receive
+              </span>
             </div>
-            <span className="block text-[10px] font-semibold tracking-wider text-gold-300">
-              Book • Shop • Perform • Receive
-            </span>
-          </div>
-        </Link>
+          </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
-          <span className="inline-flex items-center gap-1 rounded-full border border-gold-400/40 bg-white/10 px-3 py-1 text-xs font-semibold text-gold-300">
-            <MapPin className="h-3.5 w-3.5 text-saffron-400" /> Hyderabad
-          </span>
+          <Link
+            to="/pujas"
+            className="hidden items-center gap-1.5 rounded-full border border-[#F7B928]/45 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white transition hover:border-[#F7B928] hover:bg-white/10 lg:inline-flex"
+          >
+            <MapPin className="h-3.5 w-3.5 text-[#F7B928]" />
+            <span>Hyderabad</span>
+            <ChevronDown className="h-3.5 w-3.5 text-[#F7B928]/80" />
+          </Link>
+        </div>
 
+        <nav className="hidden items-center gap-7 md:flex">
           {links.map((l) => (
             <NavLink key={l.to} to={l.to} end={l.end} className={cls}>
               {l.label}
@@ -107,13 +114,13 @@ export default function Navbar() {
               <NavLink to="/bookings" className={cls}>
                 My Bookings
               </NavLink>
-              <span className="flex items-center gap-1 rounded-full border border-gold-400/40 bg-maroon-700/80 px-3 py-1 text-xs font-semibold text-gold-300">
+              <span className="flex items-center gap-1 rounded-full border border-[#F7B928]/40 bg-white/10 px-3 py-1 text-xs font-semibold text-[#F7B928]">
                 <User className="h-3.5 w-3.5" />
                 {(user.name || 'Devotee').split(' ')[0]}
               </span>
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-1 text-xs font-medium text-cream-200 hover:text-saffron-300"
+                className="flex items-center gap-1 text-xs font-medium text-white/90 hover:text-[#F7B928]"
               >
                 <LogOut className="h-3.5 w-3.5" />
                 Logout
@@ -124,7 +131,10 @@ export default function Navbar() {
               <NavLink to="/login" className={cls}>
                 Login
               </NavLink>
-              <Link to="/pujas" className="btn-primary !py-2 !px-4 text-xs">
+              <Link
+                to="/pujas"
+                className="rounded-xl bg-gradient-to-b from-[#F7B928] to-[#F58216] px-5 py-2 text-xs font-extrabold text-[#300B32] shadow-md transition hover:brightness-105 active:scale-[0.98]"
+              >
                 Book a Puja
               </Link>
             </>
