@@ -113,8 +113,9 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 border-b border-[#F7B928]/35 bg-[#300B32] shadow-lg backdrop-blur">
       <div className="container-x flex h-16 items-center justify-between gap-4">
         <div className="flex items-center gap-6">
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <GetPujaLotusLogo />
+          <Link to="/" className="flex items-center gap-3 group">
+            <GetPujaLotusLogo className="h-11 w-11" />
+            <span className="h-8 w-[1px] bg-[#F7B928]/60" aria-hidden="true" />
             <div>
               <div className="font-serif text-2xl font-bold leading-none tracking-tight text-white">
                 Get<span className="text-[#F7B928]">Puja</span>
@@ -214,39 +215,62 @@ export default function Navbar() {
         </nav>
 
         <button
-          className="text-cream-100 md:hidden"
+          className="text-white md:hidden"
           onClick={() => setOpen((o) => !o)}
           aria-label="Toggle menu"
         >
-          {open ? <X /> : <Menu />}
+          {open ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
         </button>
       </div>
 
       {open && (
         <div
-          className="flex flex-col gap-3 border-t border-maroon-700 bg-maroon-900 px-6 py-4 md:hidden"
-          onClick={() => setOpen(false)}
+          className="flex flex-col gap-3 border-t border-[#F7B928]/30 bg-[#300B32] px-6 py-4 md:hidden"
         >
+          <div className="mb-1">
+            <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-[#F7B928]">
+              Service Location (Hyderabad)
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {HYDERABAD_LOCATIONS.slice(0, 6).map((loc) => (
+                <button
+                  key={loc.label}
+                  type="button"
+                  onClick={() => {
+                    handleSelectLocation(loc);
+                    setOpen(false);
+                  }}
+                  className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${
+                    selectedLoc.label === loc.label
+                      ? 'border-[#F7B928] bg-[#F7B928] text-[#300B32]'
+                      : 'border-[#F7B928]/40 text-white/90'
+                  }`}
+                >
+                  {loc.short}
+                </button>
+              ))}
+            </div>
+          </div>
           {links.map((l) => (
-            <NavLink key={l.to} to={l.to} end={l.end} className={cls}>
+            <NavLink key={l.to} to={l.to} end={l.end} className={cls} onClick={() => setOpen(false)}>
               {l.label}
             </NavLink>
           ))}
           {user ? (
             <>
-              <NavLink to="/bookings" className={cls}>
+              <NavLink to="/bookings" className={cls} onClick={() => setOpen(false)}>
                 My Bookings
               </NavLink>
-              <button onClick={handleLogout} className="text-left text-sm text-cream-100">
+              <button onClick={handleLogout} className="text-left text-sm text-white">
                 Logout
               </button>
             </>
           ) : (
             <>
-              <NavLink to="/login" className={cls}>
+              <NavLink to="/login" className={cls} onClick={() => setOpen(false)}>
                 Login
               </NavLink>
-              <NavLink to="/register" className={cls}>
+              <NavLink to="/register" className={cls} onClick={() => setOpen(false)}>
                 Sign up
               </NavLink>
             </>

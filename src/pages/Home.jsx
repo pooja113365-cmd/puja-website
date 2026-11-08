@@ -202,10 +202,10 @@ const HERO_SIX_FEATURES = [
   },
 ];
 
-/* Animated Swaying Hanging Diyas with Flickering Flames */
+/* Animated Swaying Hanging Diyas with Flickering Flames (Visible on Mobile & Desktop) */
 function HangingDiyas() {
   return (
-    <div className="pointer-events-none absolute left-2 top-0 z-10 hidden h-52 w-28 select-none lg:block" aria-hidden="true">
+    <div className="pointer-events-none absolute left-1 top-0 z-10 block h-44 w-24 origin-top-left scale-[0.72] select-none sm:scale-90 lg:left-2 lg:h-52 lg:w-28 lg:scale-100" aria-hidden="true">
       {/* Left Swaying Diya */}
       <motion.svg
         viewBox="0 0 60 200"
@@ -302,7 +302,7 @@ function LotusBadgeIcon() {
 
 function OmOrnamentDivider() {
   return (
-    <div className="my-2.5 flex max-w-md items-center gap-3" aria-hidden="true">
+    <div className="mx-auto my-2.5 flex max-w-xs items-center gap-3 sm:max-w-md lg:mx-0" aria-hidden="true">
       <div className="flex flex-1 items-center">
         <div className="h-[1.5px] flex-1 bg-gradient-to-r from-transparent via-[#F7B928]/85 to-[#F7B928]" />
         <span className="h-1.5 w-1.5 rotate-45 bg-[#F7B928]" />
@@ -436,6 +436,27 @@ function SacredKalashAndDeepamDecor() {
   );
 }
 
+function FeatureCardsGrid({ className = '' }) {
+  return (
+    <div className={`grid grid-cols-3 gap-2 sm:gap-2.5 ${className}`}>
+      {HERO_SIX_FEATURES.map(({ Icon, line1, line2, to }) => (
+        <Link
+          key={line1 + line2}
+          to={to}
+          className="group flex flex-col items-center justify-center gap-1.5 rounded-xl border border-[#F7B928]/55 bg-[#300B32]/85 px-2 py-2.5 text-center shadow-sm backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-[#F7B928] hover:bg-[#3E1041]/90 lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:py-2 lg:text-left"
+        >
+          <Icon />
+          <span className="text-[11px] font-medium leading-tight text-white sm:text-xs">
+            {line1}
+            <br />
+            <span className="text-white/95">{line2}</span>
+          </span>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 export default function Home() {
   const { data, loading, error, reload } = useFetch('/pujas', { featured: 'true', limit: 6 });
   const [searchText, setSearchText] = useState('');
@@ -478,7 +499,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section — Deep Purple #300B32, Primary Gold #F7B928, Secondary Orange #F58216 */}
-      <section className="relative flex min-h-[calc(100vw*16/9)] items-center overflow-hidden bg-[#300B32] text-white sm:min-h-0 lg:min-h-[calc(100vh-4rem)] lg:w-full">
+      <section className="relative flex flex-col justify-between overflow-hidden bg-[#300B32] text-white lg:min-h-[calc(100vh-4rem)] lg:w-full lg:flex-row lg:items-center">
         {/* Warm Ambient Gradient Overlay */}
         <div
           className="pointer-events-none absolute inset-0"
@@ -494,7 +515,7 @@ export default function Home() {
         {/* Continuously Rotating Top-Right Sacred Lotus Mandala Chakra */}
         <motion.svg
           viewBox="0 0 220 220"
-          className="pointer-events-none absolute -right-10 -top-10 h-80 w-80 opacity-20"
+          className="pointer-events-none absolute -right-12 -top-12 h-56 w-56 opacity-25 lg:-right-10 lg:-top-10 lg:h-80 lg:w-80 lg:opacity-20"
           fill="none"
           aria-hidden="true"
           animate={{ rotate: 360 }}
@@ -536,7 +557,7 @@ export default function Home() {
           />
         ))}
 
-        {/* Warm Illuminated Charminar Silhouette in Center Backdrop */}
+        {/* Warm Illuminated Charminar Silhouette in Center Backdrop (Desktop) */}
         <div className="pointer-events-none absolute inset-y-0 left-[46%] hidden w-[360px] -translate-x-1/2 items-center justify-center lg:flex">
           <div className="relative h-80 w-full">
             <img
@@ -552,16 +573,16 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="container-x relative z-10 grid w-full items-center gap-6 py-6 sm:py-8 lg:grid-cols-12">
-          {/* Left Column */}
+        <div className="container-x relative z-10 grid w-full items-center gap-5 pt-6 pb-2 sm:py-8 lg:grid-cols-12 lg:gap-6">
+          {/* Left Column (Heading, Divider, Subtitle, Search Bar + Desktop Feature Cards) */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
-            className="lg:col-span-6"
+            className="text-center lg:col-span-6 lg:text-left"
           >
             {/* 3-Line Serif Heading */}
-            <h1 className="font-serif text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
+            <h1 className="font-serif text-[2.35rem] font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
               Book Pujas, Buy
               <br />
               Puja Items &amp;
@@ -572,53 +593,42 @@ export default function Home() {
             {/* Ornamental Gold Om Divider */}
             <OmOrnamentDivider />
 
-            {/* Subtitle */}
-            <p className="max-w-xl text-sm font-medium leading-snug text-white/95 sm:text-base">
-              • Your Trusted Platform for Online Puja, Puja Items &amp;
-              <br className="hidden sm:inline" /> Verified Priests in Hyderabad.
-            </p>
+            {/* Subtitle with Shield-Check Icon on Mobile */}
+            <div className="mx-auto flex max-w-md items-center justify-center gap-2.5 text-left lg:mx-0 lg:max-w-xl lg:justify-start">
+              <span className="shrink-0 lg:hidden">
+                <IconShieldSvg />
+              </span>
+              <p className="text-xs font-medium leading-snug text-white/95 sm:text-base">
+                <span className="hidden lg:inline">• </span>Your Trusted Platform for Online Puja, Puja Items &amp; Verified Priests in Hyderabad.
+              </p>
+            </div>
 
             {/* White Pill Search Bar with Gold/Orange CTA */}
             <form
               onSubmit={handleSearch}
-              className="mt-4 flex max-w-xl items-center gap-2 rounded-full border border-[#F7B928]/45 bg-white p-1.5 shadow-xl"
+              className="mx-auto mt-4 flex max-w-xl items-center gap-1.5 rounded-full border border-[#F7B928]/45 bg-white p-1.5 shadow-xl lg:mx-0"
             >
-              <Search className="ml-3.5 h-4 w-4 shrink-0 text-[#300B32]" />
+              <Search className="ml-3 h-4 w-4 shrink-0 text-[#300B32]" />
               <input
                 type="text"
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
-                placeholder={typedPlaceholder || 'Search for Pujas, Homams, Items, Temples...'}
-                className="w-full bg-transparent px-2 py-1 text-sm text-[#300B32] outline-none placeholder:text-[#300B32]/65"
+                placeholder={typedPlaceholder || 'Search for Pujas, Homams, Items...'}
+                className="w-full min-w-0 bg-transparent px-1.5 py-1 text-xs text-[#300B32] outline-none placeholder:text-[#300B32]/65 sm:text-sm"
               />
               <button
                 type="submit"
-                className="shrink-0 rounded-full bg-gradient-to-r from-[#F7B928] to-[#F58216] px-6 py-2 text-xs font-extrabold text-[#300B32] shadow-md transition hover:brightness-105 active:scale-[0.98]"
+                className="shrink-0 rounded-full bg-gradient-to-r from-[#F7B928] to-[#F58216] px-4 py-2 text-xs font-extrabold text-[#300B32] shadow-md transition hover:brightness-105 active:scale-[0.98] sm:px-6"
               >
                 Get Started →
               </button>
             </form>
 
-            {/* 6 Feature Cards in 3x2 Grid with Gold Transparent Borders & SVG Icons */}
-            <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
-              {HERO_SIX_FEATURES.map(({ Icon, line1, line2, to }) => (
-                <Link
-                  key={line1 + line2}
-                  to={to}
-                  className="group flex items-center gap-3 rounded-xl border border-[#F7B928]/45 bg-[#300B32]/80 px-3 py-2 shadow-sm backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-[#F7B928] hover:bg-[#3E1041]/90"
-                >
-                  <Icon />
-                  <span className="text-xs font-medium leading-tight text-white">
-                    {line1}
-                    <br />
-                    <span className="text-white/95">{line2}</span>
-                  </span>
-                </Link>
-              ))}
-            </div>
+            {/* Desktop 6 Feature Cards in 3x2 Grid */}
+            <FeatureCardsGrid className="mt-5 hidden lg:grid" />
           </motion.div>
 
-          {/* Right Column — Large Wide Cusped Sacred Temple Arch Shape Showing Full Family & Priest Havan */}
+          {/* Right Column — Large Wide Cusped Sacred Temple Arch Shape + Mobile 3x2 Feature Cards Below Arch */}
           <motion.div
             initial={{ opacity: 0, y: 120, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -694,7 +704,7 @@ export default function Home() {
                   strokeLinejoin="round"
                 />
 
-                {/* Centered Bottom Kalash, Mango Leaves & Marigold Flowers */}
+                {/* Centered Bottom Kalash, Mango Leaves, Yellow & Red Flowers */}
                 <g transform="translate(320, 428)">
                   {/* Left & Right Green Mango Leaves at Base */}
                   <path d="M -52 12 C -85 -4, -120 8, -138 26 C -106 32, -74 26, -52 12 Z" fill="#16A34A" />
@@ -702,16 +712,28 @@ export default function Home() {
                   <path d="M 52 12 C 85 -4, 120 8, 138 26 C 106 32, 74 26, 52 12 Z" fill="#16A34A" />
                   <path d="M 46 22 C 76 16, 104 28, 118 42 C 88 42, 64 34, 46 22 Z" fill="#15803D" />
 
-                  {/* Left & Right Golden Marigold Flowers */}
-                  <g transform="translate(-62, 22)">
-                    <circle cx="0" cy="0" r="19" fill="#F58216" stroke="#B45309" strokeWidth="1" />
-                    <circle cx="0" cy="0" r="13" fill="#F7B928" />
-                    <circle cx="0" cy="0" r="6" fill="#D97706" />
+                  {/* Outer Yellow Flowers */}
+                  <g transform="translate(-76, 18)">
+                    <circle cx="0" cy="0" r="18" fill="#FACC15" stroke="#CA8A04" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="11" fill="#F7B928" />
+                    <circle cx="0" cy="0" r="5" fill="#B45309" />
                   </g>
-                  <g transform="translate(62, 22)">
-                    <circle cx="0" cy="0" r="19" fill="#F58216" stroke="#B45309" strokeWidth="1" />
-                    <circle cx="0" cy="0" r="13" fill="#F7B928" />
-                    <circle cx="0" cy="0" r="6" fill="#D97706" />
+                  <g transform="translate(76, 18)">
+                    <circle cx="0" cy="0" r="18" fill="#FACC15" stroke="#CA8A04" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="11" fill="#F7B928" />
+                    <circle cx="0" cy="0" r="5" fill="#B45309" />
+                  </g>
+
+                  {/* Inner Red Flowers */}
+                  <g transform="translate(-48, 28)">
+                    <circle cx="0" cy="0" r="14" fill="#DC2626" stroke="#991B1B" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="8" fill="#EF4444" />
+                    <circle cx="0" cy="0" r="3.5" fill="#FACC15" />
+                  </g>
+                  <g transform="translate(48, 28)">
+                    <circle cx="0" cy="0" r="14" fill="#DC2626" stroke="#991B1B" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="8" fill="#EF4444" />
+                    <circle cx="0" cy="0" r="3.5" fill="#FACC15" />
                   </g>
 
                   {/* Top Mango Leaves & Coconut on Kalash */}
@@ -729,7 +751,31 @@ export default function Home() {
                 </g>
               </svg>
             </motion.div>
+
+            {/* Mobile 3x2 Feature Cards Placed Directly Below the Arch */}
+            <FeatureCardsGrid className="mt-3 lg:hidden" />
           </motion.div>
+        </div>
+
+        {/* Bottom Illuminated Golden Charminar Panorama on Mobile */}
+        <div className="pointer-events-none relative mt-2 h-36 w-full overflow-hidden lg:hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-[#300B32] via-transparent to-[#300B32] z-10" />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(circle at 50% 65%, rgba(247, 185, 40, 0.45) 0%, rgba(245, 130, 22, 0.2) 45%, transparent 75%)',
+            }}
+          />
+          <img
+            src="/images/charminar-bg.jpg"
+            alt="Charminar Hyderabad"
+            className="mx-auto h-full w-full max-w-md object-cover object-center opacity-75 mix-blend-screen"
+            style={{
+              maskImage: 'radial-gradient(ellipse at center, black 45%, transparent 82%)',
+              WebkitMaskImage: 'radial-gradient(ellipse at center, black 45%, transparent 82%)',
+              filter: 'sepia(1) hue-rotate(-10deg) saturate(3.2) brightness(1.1)',
+            }}
+          />
         </div>
       </section>
 
