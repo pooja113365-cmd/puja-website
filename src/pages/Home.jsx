@@ -585,73 +585,36 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Right Column — Scalloped Sacred Temple Arch Frame Rising From Bottom on Load */}
+          {/* Right Column — Wide Golden Frame Showing Full Family & Priest Havan Image Rising From Bottom */}
           <motion.div
             initial={{ opacity: 0, y: 120, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
             className="relative lg:col-span-5"
           >
-            {/* Pulsing Golden-Orange Aura Behind Arch */}
+            {/* Pulsing Golden-Orange Aura Behind Image */}
             <motion.div
-              animate={{ scale: [0.96, 1.06, 0.96], opacity: [0.55, 0.85, 0.55] }}
+              animate={{ scale: [0.96, 1.05, 0.96], opacity: [0.5, 0.85, 0.5] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="pointer-events-none absolute -inset-4 rounded-full bg-gradient-to-tr from-[#F58216]/35 via-[#F7B928]/25 to-transparent blur-2xl"
+              className="pointer-events-none absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#F58216]/35 via-[#F7B928]/25 to-transparent blur-2xl"
             />
 
             <motion.div
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-              className="relative mx-auto max-w-[445px]"
+              className="relative mx-auto overflow-hidden rounded-3xl border-[3px] border-[#F7B928] bg-[#300B32] p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.65)] ring-1 ring-[#F7B928]/40"
             >
-              {/* SVG Temple Cusped Arch Frame */}
-              <svg
-                viewBox="0 0 460 440"
-                className="w-full drop-shadow-[0_18px_38px_rgba(0,0,0,0.65)]"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <clipPath id="templeArchClip">
-                    <path d="M 230 14 C 258 44, 298 46, 316 68 C 338 58, 378 78, 386 112 C 418 118, 444 156, 444 206 L 444 330 C 444 388, 398 422, 342 422 L 118 422 C 62 422, 16 388, 16 330 L 16 206 C 16 156, 42 118, 74 112 C 82 78, 122 58, 144 68 C 162 46, 202 44, 230 14 Z" />
-                  </clipPath>
-                  <linearGradient id="archGoldBorder" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#FFFBEB" />
-                    <stop offset="35%" stopColor="#F7B928" />
-                    <stop offset="70%" stopColor="#F58216" />
-                    <stop offset="100%" stopColor="#F7B928" />
-                  </linearGradient>
-                </defs>
-
-                {/* Clipped Hero Puja Image Rising From Bottom */}
-                <g clipPath="url(#templeArchClip)">
-                  <motion.image
-                    href="/images/hero-puja.jpg"
-                    x="0"
-                    y="10"
-                    width="460"
-                    height="425"
-                    preserveAspectRatio="xMidYMid slice"
-                    initial={{ y: 110, opacity: 0, scale: 1.06 }}
-                    animate={{ y: 10, opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.95, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                </g>
-
-                {/* Outer & Inner Glowing Gold Arch Borders */}
-                <path
-                  d="M 230 14 C 258 44, 298 46, 316 68 C 338 58, 378 78, 386 112 C 418 118, 444 156, 444 206 L 444 330 C 444 388, 398 422, 342 422 L 118 422 C 62 422, 16 388, 16 330 L 16 206 C 16 156, 42 118, 74 112 C 82 78, 122 58, 144 68 C 162 46, 202 44, 230 14 Z"
-                  fill="none"
-                  stroke="url(#archGoldBorder)"
-                  strokeWidth="5.5"
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
+                <motion.img
+                  src="/images/hero-puja.jpg"
+                  alt="Family & Vedic Priest Performing Puja & Havan"
+                  className="h-full w-full object-cover"
+                  initial={{ y: 80, scale: 1.08, opacity: 0 }}
+                  animate={{ y: 0, scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                 />
-                <path
-                  d="M 230 22 C 256 49, 294 51, 311 72 C 332 63, 370 82, 378 114 C 408 120, 434 156, 434 206 L 434 328 C 434 382, 391 414, 338 414 L 122 414 C 69 414, 26 382, 26 328 L 26 206 C 26 156, 52 120, 82 114 C 90 82, 128 63, 149 72 C 166 51, 204 49, 230 22 Z"
-                  fill="none"
-                  stroke="#F7B928"
-                  strokeOpacity="0.45"
-                  strokeWidth="1.2"
-                />
-              </svg>
+                <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-[#F7B928]/45" />
+              </div>
             </motion.div>
           </motion.div>
         </div>
