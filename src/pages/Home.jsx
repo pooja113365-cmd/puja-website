@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ShoppingCart, Search, ArrowRight, Sparkles } from 'lucide-react';
+import { ShoppingCart, Search, ArrowRight } from 'lucide-react';
 import useFetch from '../hooks/useFetch';
 import PujaCard from '../components/PujaCard';
 import { PujaGridSkeleton } from '../components/PujaCardSkeleton';
 import { ErrorState } from '../components/States';
 import { useBookingModal } from '../context/BookingModalContext';
+import DiwaliSplashOverlay from '../components/DiwaliSplashOverlay';
 
 const ARCH_CATEGORY_SLIDES = [
   { title: 'Pujas • Home & Office', img: '/images/hero-puja.jpg' },
@@ -524,25 +525,8 @@ export default function Home() {
 
   return (
     <>
-      {/* Top Festive Diwali Wishes Banner */}
-      <div className="relative overflow-hidden border-b border-[#F7B928]/55 bg-gradient-to-r from-[#260728] via-[#4A124E] to-[#260728] px-3 py-2 text-white shadow-md">
-        <div className="container-x flex flex-wrap items-center justify-center gap-2 text-center sm:justify-between">
-          <div className="flex items-center justify-center gap-2 text-[11px] font-semibold sm:text-xs">
-            <span className="text-base leading-none" aria-hidden="true">🪔</span>
-            <span>
-              <b className="text-[#F7B928]">शुभ दीपावली • Happy Diwali!</b> Wishing You &amp; Your Family Peace, Prosperity &amp; Divine Blessings of Goddess Lakshmi &amp; Lord Ganesha
-            </span>
-            <span className="text-base leading-none" aria-hidden="true">🪔</span>
-          </div>
-          <button
-            type="button"
-            onClick={() => openBookingModal({ serviceTitle: 'Diwali Special Lakshmi-Ganesh Puja' })}
-            className="inline-flex items-center gap-1 rounded-full border border-[#F7B928] bg-[#F7B928]/20 px-3 py-0.5 text-[11px] font-extrabold text-[#F7B928] transition hover:bg-[#F7B928] hover:text-[#300B32]"
-          >
-            <Sparkles className="h-3 w-3" /> Book Diwali Puja →
-          </button>
-        </div>
-      </div>
+      {/* Full-Screen Diwali Firework Blasters Splash Overlay (Auto-hides after ~5 seconds) */}
+      <DiwaliSplashOverlay />
 
       {/* Hero Section — Deep Purple #300B32, Primary Gold #F7B928, Secondary Orange #F58216 */}
       <section className="relative flex flex-col justify-between overflow-hidden bg-[#300B32] text-white lg:min-h-[calc(100vh-4rem)] lg:w-full lg:flex-row lg:items-center">
